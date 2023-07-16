@@ -4,6 +4,7 @@ export type Config = {
 
 export type Collection = {
   name: string;
+  slug: string;
   fields: Array<Field>;
 };
 

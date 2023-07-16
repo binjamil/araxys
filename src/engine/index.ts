@@ -1,11 +1,18 @@
-import { BuildFunc } from "./types";
+import { BuildFunc, CreateArgs, Document, FindArgs } from "./types";
 
-export const build: BuildFunc = async ({ config }) => {
-  const find = async <T>() => {
-    return {} as T;
+export const build: BuildFunc = async ({ config, db }) => {
+  const find = async (args: FindArgs) => {
+    const { collection } = args;
+    const results: Array<Document> = await db
+      .collection(collection.slug)
+      .find()
+      .toArray();
+    return results;
   };
 
-  const create = async <T>(data: T) => {};
+  const create = async (args: CreateArgs) => {
+    const { collection, data } = args;
+  };
 
   return {
     find,
