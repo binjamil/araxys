@@ -8,9 +8,16 @@ const main = async () => {
   const db = client.db();
   const e = await engine.build({ config, db });
   
+  // Test create
+  await e.create({collection: config.collections[0], data: {
+    first_name: "Lalo",
+    last_name: "Salamanca",
+    age: 42,
+  }});
+
+  // Test find
   const testResults = await e.find({collection: config.collections[0]});
   console.log(JSON.stringify(testResults, null, 2));
-  process.exit();
 };
 
 const connectMongo = async (uri: string) => {

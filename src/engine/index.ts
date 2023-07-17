@@ -11,7 +11,9 @@ export const build: BuildFunc = async ({ config, db }) => {
   };
 
   const create = async (args: CreateArgs) => {
-    const { collection, data } = args;
+    const { collection, data } = args; 
+    // data needs to be sanitized according to collection config
+    await db.collection(collection.slug).insertOne(data);
   };
 
   return {
